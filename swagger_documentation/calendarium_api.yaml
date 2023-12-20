@@ -1,0 +1,23 @@
+openapi: 3.0.0
+info:
+  title: Calendarium Backend API's
+  version: 1.0.0
+paths:
+  /sign-up:
+    post:
+      summary: Create a new user
+      requestBody:
+        content:
+          application/json:
+            example:
+              first_name: str
+              last_name: str
+              username: str
+              email: str
+              password: str
+      responses:
+        '201':
+          description: User created successfully
+  
+
+  
