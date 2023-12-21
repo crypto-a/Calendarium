@@ -4,11 +4,9 @@ Programmer: Ali Rahbar
 Date: December 16, 2023
 Description: This file is incharge of starting up the calendarium backend server.
 """
-from app import app
 from flask import Flask
 from flask_cors import CORS
 from app import app
-from flask_sqlalchemy import SQLAlchemy
 from database.db import db
 import os
 
