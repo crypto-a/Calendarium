@@ -29,7 +29,6 @@ print('this is server', id(db))
 def run_flask():
     """
     Run the flask webserver and prepares the database
-    :return:
     """
     global flask_app
 
