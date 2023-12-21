@@ -6,7 +6,6 @@ Description: This file includes the routes for the backend which will list teh a
 """
 from app import app
 
-
 @app.route('/')
 def index():
     return 'Hello, World!'

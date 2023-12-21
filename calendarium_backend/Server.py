@@ -7,6 +7,7 @@ Description: This file is incharge of starting up the calendarium backend server
 from app import app
 from flask import Flask
 from flask_cors import CORS
+from app import app
 from flask_sqlalchemy import SQLAlchemy
 from database.db import db
 import os
@@ -16,10 +17,13 @@ DEBUG = True
 PORT = int(os.getenv('PORT', 44400))
 
 # Start the app
-flask_app = Flask( __name__, static_url_path='',template_folder='templates' )
+flask_app = Flask( __name__, static_url_path='', template_folder='templates')
 flask_app.config.from_pyfile('database/config.py')
 flask_app.secret_key = "flask rocks!"
 db.init_app(flask_app)
+
+CORS(flask_app)
+print('this is server', id(db))
 
 
 def run_flask():
@@ -27,12 +31,12 @@ def run_flask():
     Run the flask webserver and prepares the database
     :return:
     """
-    db.init_app(flask_app)
+    global flask_app
 
-    CORS(flask_app)
-    print('this is server', id(db))
+    flask_app.register_blueprint(app.api_bp, url_prefix='/api')
+    flask_app.run(host='0.0.0.0', port=PORT, debug=False)
 
 
 if __name__ == '__main__':
 
-    app.run(debug=DEBUG)
+    run_flask()
