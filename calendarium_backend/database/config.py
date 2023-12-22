@@ -17,7 +17,7 @@ def get_env_variable(name):
 # Set up the base directory
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-# database for local test (sqlite)
+# database for local test (sqlite3)
 SQLITE_FILE_PATH = os.path.join(basedir, 'database.db')  # Adjust the database file path as needed
 DB_URL = 'sqlite:///{}'.format(SQLITE_FILE_PATH)
 

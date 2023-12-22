@@ -1,11 +1,27 @@
 openapi: 3.0.0
 info:
-  title: Calendarium Backend API's
-  version: 1.0.0
+  title: Calendarium Backend
+
+  description: API for Calendarium Backend
+  version: 1.0.1
+  
+servers:
+  - url: 1.0.0.1:44000 # ToDo
+    variables: {}
+    description: Test Server Backend
+    
+  - url: www.google.com  # ToDo
+    variables: {}
+    description: Production Server Backend
+    
 paths:
-  /sign-up:
+
+  # Authentication
+  /APISignUp:
     post:
       summary: Create a new user
+      tags:
+        - Authentication
       requestBody:
         content:
           application/json:
@@ -18,6 +34,147 @@ paths:
       responses:
         '201':
           description: User created successfully
+          
+  /APISignIn:
+    post:
+      summary: Identify User
+      tags:
+        - Authentication
+      requestBody:
+        content:
+          application/json:
+            example:
+              username: str
+              password: str
+      responses:
+        '200':
+          description: User Authenticated
+  
+        '401':
+          description: Passowrd is worng
+          
+  /APIChangePassword:
+    put:
+      summary: Changes The Pasword of the user
+      tags:
+        - Authentication
+      requestBody:
+        content:
+          application/json:
+            example:
+              user_id: str
+              old_password: str
+              new_password: str
+      responses:
+        '200':
+          description: User Authenticated
+        
+        '401':
+          description: Passowrd is worng
+          
+  /APIResertPassword:
+    post:
+      summary: Identify User
+      tags:
+        - Authentication
+      requestBody:
+        content:
+          application/json:
+            example:
+              username: str
+      responses:
+        '200':
+          description: Reset Email sent to user
+          
+  /APIDeleteAccount:
+    delete:
+      summary: Add a new account to system
+      tags:
+        - Authentication
+        
+      responses:
+        '200':
+          description: Subscription added successfully
+            
+  # Subscriptions
+  /APIGetSubscriptionStatus:
+    get:
+      summary: create subscription for user
+      tags:
+        - Payments
+      responses:
+        '200':
+          description: Subscription added successfully
+          
+  /APICreateSubscription:
+    post:
+      summary: create subscription for user
+      tags:
+        - Payments
+      requestBody:
+        content:
+          application/json:
+            example:
+              user_id: str
+              payment_token: str
+      responses:
+        '200':
+          description: Subscription added successfully
+          
+  /APICancelSubscription:
+    delete:
+      summary: Cancel Service
+      tags:
+        - Payments
+      responses:
+        '200':
+          description: Subscription added successfully
+        
+        '404':
+          description: User not found
+          
+  # Accounts Manager
+  /APIGetSercivesAccountsData:
+    get:
+      summary: Cancel Service
+      tags:
+        - Accounts Manager
+      responses:
+        '200':
+          description: Subscription added successfully
+        
+        '404':
+          description: User not found
+          
+  /APIAddServiceAccount:
+    post:
+      summary: Add a new account to system
+      tags:
+        - Accounts Manager
+      requestBody:
+        content:
+          application/json:
+            example:
+              user_id: str
+              password: str
+      responses:
+        '200':
+          description: Subscription added successfully
+        
+        '404':
+          description: User not found
+          
+  /APIDeleteServiceAccount:
+    delete:
+      summary: Add a new account to system
+      tags:
+        - Accounts Manager
+        
+      responses:
+        '200':
+          description: Subscription added successfully
+    
+          
+  
   
 
-  
