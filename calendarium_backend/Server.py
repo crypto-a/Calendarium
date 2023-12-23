@@ -8,6 +8,7 @@ from flask import Flask
 from flask_cors import CORS
 from app import app
 from database.db import db
+# from database.db_setup import init_db
 import os
 
 # Set the status of the debugger
@@ -16,9 +17,11 @@ PORT = int(os.getenv('PORT', 44400))
 
 # Start the app
 flask_app = Flask( __name__, static_url_path='', template_folder='templates')
-flask_app.config.from_pyfile('database/config.py')
+flask_app.config.from_pyfile('config.py')
 flask_app.secret_key = "flask rocks!"
+
 db.init_app(flask_app)
+
 
 CORS(flask_app)
 print('this is server', id(db))
@@ -31,7 +34,7 @@ def run_flask():
     global flask_app
 
     flask_app.register_blueprint(app.api_bp, url_prefix='/api')
-    flask_app.run(host='0.0.0.0', port=PORT, debug=False)
+    flask_app.run(host='0.0.0.0', port=PORT, debug=True)
 
 
 if __name__ == '__main__':

@@ -4,7 +4,7 @@ Programmer: Ali Rahbar
 Date: December 21, 2023
 Description: This file holds all the database models used in the project
 """
-from db import db
+from database.db import db
 from Authentication import PasswordManager
 from datetime import datetime
 
@@ -47,7 +47,7 @@ class User(db.Model):
         Date: December 21, 2023
         Returns a boolean of weather the password is correct or not
         """
-        return PasswordManager.hash_password(password + self.salt) == self.password_hash
+        return self.generate_password_hash(password + self.salt) == self.password_hash
 
 
 
