@@ -43,15 +43,15 @@ class Authentication:
         ----
         Signs in the user if the password is correct
         """
-        user = User.query.filter_by(username=username).first()
-
+        data_query = User.query.filter_by(username=username)
+        database_result = db_trans.select_from_table_first_query(data_query)
         # If user exists
-        if user is None:
+        if database_result is None:
             # Return error
             return {"message": "This username does not exist."}, 401
 
         # Checks if the password is correct
-        if user.check_password_hash(password):
+        if database_result.check_password_hash(password):
 
             # ToDo: Return the user token and sign user in!!!
             return 200
