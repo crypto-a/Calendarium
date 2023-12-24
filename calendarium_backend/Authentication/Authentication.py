@@ -23,7 +23,6 @@ class Authentication:
 
         # If user exists
         if database_result is not None:
-
             # Return error
             return {"message": "The user address already exists!!"}, 409
 
@@ -43,17 +42,14 @@ class Authentication:
         ----
         Signs in the user if the password is correct
         """
-        user = User.query.filter_by(username=username).first()
-
+        user = User.query.filter_by(username=username)
+        database_result = db_trans.select_from_table_first_query(user)
         # If user exists
         if user is None:
             # Return error
             return {"message": "This username does not exist."}, 401
-        #Checks if the password is correct
+        # Checks if the password is correct
         if user.check_password_hash(password):
             return 200
         else:
             return {"message": "The password is incorrect."}, 401
-
-
-
