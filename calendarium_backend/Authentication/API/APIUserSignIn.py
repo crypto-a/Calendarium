@@ -9,6 +9,7 @@ class APIUserSignIn(Resource):
         """
         API for signing in a user
         """
+        #collect variables
         username = request.args.get('username')
         password = request.args.get('password')
 
