@@ -20,7 +20,7 @@ def hash_password(input_string: str) -> str:
     sha256_hash.update(input_string.encode('utf-8'))
     hashed_string = sha256_hash.hexdigest()
 
-    return hashed_string
+    return str(hashed_string)
 
 
 def generate_salt(length=16) -> str:

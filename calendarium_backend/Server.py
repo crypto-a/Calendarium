@@ -13,12 +13,12 @@ import os
 
 # Set the status of the debugger
 DEBUG = True
-PORT = int(os.getenv('PORT', 44400))
+PORT = int(os.getenv('PORT', 44000))
 
 # Start the app
 flask_app = Flask( __name__, static_url_path='', template_folder='templates')
 flask_app.config.from_pyfile('config.py')
-flask_app.secret_key = "flask rocks!"
+flask_app.secret_key = "flask rocks!"  # ToDo: Move to an enviorment variable
 
 db.init_app(flask_app)
 

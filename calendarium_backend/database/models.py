@@ -33,14 +33,14 @@ class User(db.Model):
         self.is_active = False
         self.username = username
         self.salt = PasswordManager.generate_salt()
-        self.password = self.generate_password_hash(password)
+        self.password_hash = str(self.generate_password_hash(password))
 
     def generate_password_hash(self, password: str) -> str:
         """Programmer: Ali Rahbar
         Date: December 21, 2023
         Returns a hash of the password
         """
-        return PasswordManager.hash_password(password + self.salt)
+        return PasswordManager.hash_password(str(password) + self.salt)
 
     def check_password_hash(self, password: str) -> bool:
         """Programmer: Ali Rahbar
@@ -51,3 +51,12 @@ class User(db.Model):
 
 
 
+# class Subscriptions(db.Model):
+#     """
+#     Model for subscriptions
+#     """
+#     __tablename__ = 'subscriptions'
+#
+#     # Table properties
+#     subscription_id = db.Column(db.Integer, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users'))
