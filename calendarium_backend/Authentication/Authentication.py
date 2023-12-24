@@ -31,7 +31,29 @@ class Authentication:
         new_user = User(first_name, last_name, username, email, password)
         db_trans.insert_to_table(new_user)
 
-        # ToDo: Send the user a conformation email
+        # ToDo: Send the user a confirmation email
 
         # Return success status
         return 201
+
+    def user_sign_in(self, username, password):
+        """
+        Programmer: Benjamin Gavriely
+        Date: December 23, 2023
+        ----
+        Signs in the user if the password is correct
+        """
+        user = User.query.filter_by(username=username).first()
+
+        # If user exists
+        if user is None:
+            # Return error
+            return {"message": "This username does not exist."}, 401
+        #Checks if the password is correct
+        if user.check_password_hash(password):
+            return 200
+        else:
+            return {"message": "The password is incorrect."}, 401
+
+
+
