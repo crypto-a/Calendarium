@@ -49,8 +49,11 @@ class Authentication:
         if user is None:
             # Return error
             return {"message": "This username does not exist."}, 401
-        #Checks if the password is correct
+
+        # Checks if the password is correct
         if user.check_password_hash(password):
+
+            # ToDo: Return the user token and sign user in!!!
             return 200
         else:
             return {"message": "The password is incorrect."}, 401
