@@ -13,6 +13,7 @@ from dateutil.relativedelta import relativedelta
 class User(db.Model):
     """Programmer: Ali Rahbar
     Date: December 24, 2023
+
     User Database Model
     """
 
@@ -55,6 +56,7 @@ class User(db.Model):
 class Subscription(db.Model):
     """Programmer: Ali Rahbar
     Date: December 24, 2023
+
     Model for subscriptions
     """
     __tablename__ = 'subscriptions'
@@ -69,7 +71,7 @@ class Subscription(db.Model):
 
         # Check if the subscription value is correct
         if subscription_type not in ['monthly', 'yearly']:
-            raise ValueError('Input value type is not supported')
+            raise ValueError('Input value type is not supported (Model: Subscription)')
 
         # Set parameters
         self.user_id = user_id
@@ -102,6 +104,7 @@ class Subscription(db.Model):
 class Payment(db.Model):
     """Programmer: Ali Rahbar
     Date: December 24, 2023
+
     Model for payments
     """
     __tablename__ = 'payments'
@@ -119,3 +122,30 @@ class Payment(db.Model):
         self.amount = amount
         self.date_time = datetime.now()
         self.payment_reference_id = payment_reference_id
+
+
+class Account(db.Model):
+    """Programmer: Ali Rahbar
+    Date: December 24, 2023
+
+    Model for accounts
+    """
+    __tablename__ = 'accounts'
+
+    account_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users'))
+    account_type = db.Column(db.String)
+    username = db.Column(db.String)
+    access_token = db.Column(db.String)
+
+    def __init__(self, user_id: int, account_type: str, username: str, access_token: str):
+        # Check if account type is supported
+        if account_type not in ['iCloud', 'Google', 'Outlook']:
+            raise ValueError('Input value type is not supported (Model: Account)')
+
+        self.user_id = user_id
+        self.account_type = account_type
+
+        # ToDo: Add encryption before writing to database
+        self.username = username
+        self.access_token = access_token
