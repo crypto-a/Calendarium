@@ -3,10 +3,10 @@ info:
   title: Calendarium Backend
 
   description: API for Calendarium Backend
-  version: 1.0.1
+  version: 1.1.0
   
 servers:
-  - url: 1.0.0.1:44000 # ToDo
+  - url: http://127.0.0.1:44000/api # ToDo
     variables: {}
     description: Test Server Backend
     
@@ -35,6 +35,26 @@ paths:
         '201':
           description: User created successfully
           
+  /APIActivateAccount:
+    get:
+      summary: activate acount
+      tags:
+        - Authentication
+      parameters:
+        - name: token
+          in: query
+          description: Token Provided in email sent to user
+          required: true
+          schema:
+            type: string 
+            
+      responses:
+        '200':
+          description: User Activated
+          
+        '401':
+          description: User Invalid
+          
   /APISignIn:
     post:
       summary: Identify User
@@ -58,11 +78,19 @@ paths:
       summary: Changes The Pasword of the user
       tags:
         - Authentication
+        
+      parameters:
+        - name: token
+          in: query
+          description: Token Provided  at SignIn
+          required: true
+          schema:
+            type: string 
+            
       requestBody:
         content:
           application/json:
             example:
-              user_id: str
               old_password: str
               new_password: str
       responses:
@@ -102,6 +130,13 @@ paths:
       summary: create subscription for user
       tags:
         - Payments
+      parameters:
+        - name: token
+          in: query
+          description: Token Provided at sign in
+          required: true
+          schema:
+            type: string 
       responses:
         '200':
           description: Subscription added successfully
@@ -111,12 +146,21 @@ paths:
       summary: create subscription for user
       tags:
         - Payments
+      parameters:
+        - name: token
+          in: query
+          description: Token Provided at sign in
+          required: true
+          schema:
+            type: string 
       requestBody:
         content:
           application/json:
             example:
               user_id: str
+              subscriotion_type: str
               payment_token: str
+              # ToDo
       responses:
         '200':
           description: Subscription added successfully
@@ -126,6 +170,13 @@ paths:
       summary: Cancel Service
       tags:
         - Payments
+      parameters:
+        - name: token
+          in: query
+          description: Token Provided at sign in
+          required: true
+          schema:
+            type: string 
       responses:
         '200':
           description: Subscription added successfully
@@ -139,6 +190,13 @@ paths:
       summary: Cancel Service
       tags:
         - Accounts Manager
+      parameters:
+        - name: token
+          in: query
+          description: Token Provided at sign in
+          required: true
+          schema:
+            type: string 
       responses:
         '200':
           description: Subscription added successfully
@@ -151,6 +209,13 @@ paths:
       summary: Add a new account to system
       tags:
         - Accounts Manager
+      parameters:
+        - name: token
+          in: query
+          description: Token Provided at sign in
+          required: true
+          schema:
+            type: string 
       requestBody:
         content:
           application/json:
@@ -169,6 +234,14 @@ paths:
       summary: Add a new account to system
       tags:
         - Accounts Manager
+        
+      parameters:
+        - name: token
+          in: query
+          description: Token Provided at sign in
+          required: true
+          schema:
+            type: string 
         
       responses:
         '200':
