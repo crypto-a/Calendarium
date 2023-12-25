@@ -1,6 +1,6 @@
 from database.models import User
 from database.db_transactions import db_transaction
-
+from SendEmail import send_confirmation_email
 # Create the database transaction mod
 db_trans = db_transaction()
 
@@ -31,7 +31,8 @@ class Authentication:
         new_user = User(first_name, last_name, username, email, password)
         db_trans.insert_to_table(new_user)
 
-        # ToDo: Send the user a confirmation email
+        # Send a confirmation email to the user
+        send_confirmation_email(email)
 
         # Return success status
         return 201
