@@ -6,7 +6,7 @@ db_trans = db_transaction()
 
 
 class Authentication:
-    def user_signup(self, first_name, last_name, username, email, password):
+    def user_signup(self, first_name: str, last_name: str, username: str, email: str, password: str):
         """
         Programmer: Benjamin Gavriely
         Date: December 23, 2023
