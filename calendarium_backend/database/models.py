@@ -98,9 +98,24 @@ class Subscription(db.Model):
         """
         return self.date_valid - datetime.now() >= 0
 
-class Payments(db.Model):
+
+class Payment(db.Model):
     """Programmer: Ali Rahbar
     Date: December 24, 2023
     Model for payments
     """
-    pass
+    __tablename__ = 'payments'
+
+    payment_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users'))
+    subscription_id = db.Column(db.Integer, db.ForeignKey('subscriptions'))
+    amount = db.Column(db.Integer)  # Value is in cents
+    date_time = db.Column(db.DateTime)
+    payment_reference_id = db.Column(db.String)
+
+    def __init__(self, user_id: int, subscription_id: int, amount: int, payment_reference_id: str):
+        self.user_id = user_id
+        self.subscription_id = subscription_id
+        self.amount = amount
+        self.date_time = datetime.now()
+        self.payment_reference_id = payment_reference_id
