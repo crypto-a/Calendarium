@@ -29,9 +29,9 @@ class User(db.Model):
     password_hash = db.Column(db.String)
     salt = db.Column(db.String)
 
-    def __init__(self, firstname=None, lastname=None, email=None, username=None, password=None):
-        self.first_name = firstname
-        self.last_name = lastname
+    def __init__(self, first_name=None, last_name=None, email=None, username=None, password=None):
+        self.first_name = first_name
+        self.last_name = last_name
         self.email = email
         self.is_active = False
         self.username = username
@@ -67,7 +67,7 @@ class Subscription(db.Model):
     subscription_type = db.Column(db.String)
     date_valid = db.Column(db.DateTime)
 
-    def __init__(self, user_id: int, subscription_type: str):
+    def __init__(self, user_id=None, subscription_type=None):
 
         # Check if the subscription value is correct
         if subscription_type not in ['monthly', 'yearly']:
@@ -84,7 +84,7 @@ class Subscription(db.Model):
         else:
             self.date_valid = datetime.now() + relativedelta(years=1)
 
-    def increment_date_valid(self):
+    def increment_date_valid(self) -> None:
         """
         Increment date after each payment
         """
@@ -93,12 +93,11 @@ class Subscription(db.Model):
         else:
             self.date_valid += relativedelta(years=1)
 
-    def is_subscription_valid(self):
+    def is_subscription_valid(self) -> bool:
         """
         Check if subscription is valid
-        :return:
         """
-        return self.date_valid - datetime.now() >= 0
+        return self.date_valid - datetime.now() >= timedelta(0)
 
 
 class Payment(db.Model):
@@ -116,7 +115,7 @@ class Payment(db.Model):
     date_time = db.Column(db.DateTime)
     payment_reference_id = db.Column(db.String)
 
-    def __init__(self, user_id: int, subscription_id: int, amount: int, payment_reference_id: str):
+    def __init__(self, user_id=None, subscription_id=None, amount=None, payment_reference_id=None):
         self.user_id = user_id
         self.subscription_id = subscription_id
         self.amount = amount
@@ -138,7 +137,7 @@ class Account(db.Model):
     username = db.Column(db.String)
     access_token = db.Column(db.String)
 
-    def __init__(self, user_id: int, account_type: str, username: str, access_token: str):
+    def __init__(self, user_id=None, account_type=None, username=None, access_token=None):
         # Check if account type is supported
         if account_type not in ['iCloud', 'Google', 'Outlook']:
             raise ValueError('Input value type is not supported (Model: Account)')
