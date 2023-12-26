@@ -1,6 +1,12 @@
 from database.models import User
 from database.db_transactions import db_transaction
 from SendEmail import send_confirmation_email
+import jwt
+import datetime
+from flask import jsonify
+
+from calendarium_backend.Server import secret_key
+
 # Create the database transaction mod
 db_trans = db_transaction()
 
@@ -23,7 +29,6 @@ class Authentication:
 
         # If user exists
         if database_result is not None:
-
             # Return error
             return {"message": "The user address already exists!!"}, 409
 
@@ -54,10 +59,11 @@ class Authentication:
         # Checks if the password is correct
         if database_result.check_password_hash(password):
 
-            # ToDo: Return the user token and sign user in!!!
-            return 200
+            # Generates an authentication token
+            token = jwt.encode({'id': database_result.id,
+                                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)},
+                               secret_key)
+            return jsonify({'token': token})
         else:
+            # Error if the password was incorrect
             return {"message": "The password is incorrect."}, 401
-
-
-

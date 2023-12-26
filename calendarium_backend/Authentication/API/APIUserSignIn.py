@@ -16,6 +16,7 @@ class APIUserSignIn(Resource):
         # sign in the user if credentials are correct.
         result = authentication.user_sign_in(username, password)
 
-        #return confirmation code
+        # returns the authentication token if user is signed in,
+        # error message if incorrect credentials
         return result
 
