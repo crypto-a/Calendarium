@@ -8,7 +8,8 @@ from flask import Flask
 from flask_cors import CORS
 from app import app
 from database.db import db
-# from database.db_setup import init_db
+import threading
+from Calendarium.SyncMod import start_sync
 import os
 
 # Set the status of the debugger
@@ -33,6 +34,11 @@ def run_flask():
     """
     global flask_app
 
+    # Start the synchronization
+    synchronization_thread = threading.Thread(target=start_sync)
+    synchronization_thread.start()
+
+    # Start the flaks app
     flask_app.register_blueprint(app.api_bp, url_prefix='/api')
     flask_app.run(host='0.0.0.0', port=PORT, debug=True)
 
