@@ -54,17 +54,17 @@ class Authentication:
         """
         data_query = User.query.filter_by(username=username)
         database_result = db_trans.select_from_table_first_query(data_query)
-        print(database_result)
+
         # If user exists
         if database_result is None:
             # Return error
             return {"message": "This username does not exist."}, 401
 
         # Checks if the password is correct
-        if database_result.check_password_hash(password):
+        if database_result[0].check_password_hash(password):
 
             # Generates an authentication token
-            token = jwt.encode({'id': database_result.id,
+            token = jwt.encode({'id': database_result[0].user_id,
                                 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)},
                                flask_app.secret_key)
 

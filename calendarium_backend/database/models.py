@@ -50,7 +50,7 @@ class User(db.Model):
         Date: December 21, 2023
         Returns a boolean of weather the password is correct or not
         """
-        return self.generate_password_hash(password + self.salt) == self.password_hash
+        return self.generate_password_hash(password) == self.password_hash
 
 
 class Subscription(db.Model):
