@@ -9,6 +9,7 @@ from flask_restful import Api
 
 from app.API.APIBase import APIBase
 from database.db_setup import init_db
+
 from Authentication.API.APIUserSignUp import APIUserSignUp
 from Authentication.API.APIUserSignIn import APIUserSignIn
 
