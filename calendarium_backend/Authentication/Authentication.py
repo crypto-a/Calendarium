@@ -62,6 +62,8 @@ class Authentication:
 
         # Activate the user's account
         database_result[0].is_active = True
+        db_trans.update_table(database_result[0])
+        print(database_result[0].is_active)
         return {"message": "Your account has been validated!"}, 200
 
     def user_sign_in(self, username, password):

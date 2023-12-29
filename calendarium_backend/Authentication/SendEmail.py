@@ -9,7 +9,7 @@ def send_confirmation_email(email_to, token):
     email_subject = 'Welcome to Calendarium!'
     #TODO: Change the email body
     email_body = ('Please press this link to confirm your Calendarium account!' +
-                  'http://127.0.0.1:44000/api/APIUserAuthenticate' + token)
+                  'http://127.0.0.1:44000/api/APIUserAuthenticate?token=' + token)
 
     message = MIMEMultipart()
     message['From'] = email_sender

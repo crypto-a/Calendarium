@@ -53,6 +53,7 @@ class User(db.Model):
         return self.generate_password_hash(password) == self.password_hash
 
 
+
 class Subscription(db.Model):
     """Programmer: Ali Rahbar
     Date: December 24, 2023

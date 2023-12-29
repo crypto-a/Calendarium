@@ -15,7 +15,7 @@ class APIUserAuthenticate(Resource):
         token = request.args.get('token')
 
         # Decodes the token to find the user id
-        decoded_token = jwt.decode(token, flask_app.secret_key)
+        decoded_token = jwt.decode(token, flask_app.secret_key, algorithms=['HS256'])
 
         # authenticates the user
         result = authentication.user_authenticate(decoded_token['id'])

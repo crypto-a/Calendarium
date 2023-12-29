@@ -16,7 +16,7 @@ def token_required(f):
             return {'message': 'Token is missing!'}, 403
 
         try:
-            data = jwt.decode(token, flask_app.secret_key)
+            data = jwt.decode(token, flask_app.secret_key, algorithms=['HS256'])
         except:
             return {'message': 'Invalid token!'}, 403
 
