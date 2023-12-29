@@ -1,5 +1,6 @@
 from database import db
 from database.models import User
+from Calendarium.Calendars.Google import GoogleCalendarService
 from database.db_transactions import db_transaction
 
 class SyncUserData:
@@ -7,10 +8,12 @@ class SyncUserData:
     _accounts: list
     _events: list
 
-    def __init__(self, user_id):
-        db_trans = db_transaction()
+    def __init__(self):
+        google_account = GoogleCalendarService('calendars/token.json', 'credentials.json')
 
-        data_query = User.query.filter_by(username='rahbaral')
-        self._user = db_trans.select_from_table_first_query(data_query)
+        for event in google_account.read_events_from_calendar():
+            print(event)
 
-        print(self._user.first_name)
+        google_account.add_event_to_calendar()
+
+

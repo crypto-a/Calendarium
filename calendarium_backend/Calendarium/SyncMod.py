@@ -7,12 +7,7 @@ from flask import current_app
 
 
 def start_sync():
-
-    with current_app.app_context():
-        db_trans = db_transaction()
-
-        print("Synchronizing is now running")
-        sync_user_data = SyncUserData(1)
+    sync_user_data = SyncUserData()
 
 
 if __name__ == "__main__":

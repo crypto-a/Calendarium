@@ -76,7 +76,7 @@ class Authentication:
         """
         data_query = User.query.filter_by(username=username)
         database_result = db_trans.select_from_table_first_query(data_query)
-        print(database_result)
+
         # If user exists
         if database_result is None:
             # Return error
