@@ -3,13 +3,13 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-def send_confirmation_email(email_to):
-    #TODO: What email is this being sent from?
-    email_sender = 'your_email@gmail.com'  # Replace with your email address
-    email_password = 'your_password'  # Replace with your email password
+def send_confirmation_email(email_to, token):
+    email_sender = 'apitestbenjaming@gmail.com'  # Replace with your email address
+    email_password = 'kzdh ngkq jcxo lcfe'  # Replace with your email password
     email_subject = 'Welcome to Calendarium!'
     #TODO: Change the email body
-    email_body = 'This is a confirmation email.'
+    email_body = ('Please press this link to confirm your Calendarium account!' +
+                  'http://127.0.0.1:44000/api/APIUserAuthenticate' + token)
 
     message = MIMEMultipart()
     message['From'] = email_sender
@@ -25,6 +25,7 @@ def send_confirmation_email(email_to):
         server.quit()
         print("Email sent successfully!")
     except Exception as e:
+        SMTP.set_debuglevel(1)
         print(f"Failed to send email. Error: {e}")
 
 
