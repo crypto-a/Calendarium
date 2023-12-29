@@ -11,6 +11,9 @@ authentication = Authentication()
 class APIUserChangePassword(Resource):
     @token_required
     def put(self):
+        """
+        Allows the user to change their current password
+        """
         # get the token from the URL
         token = request.args.get('token')
 
