@@ -1,0 +1,117 @@
+.navbar-container {
+    background: rgba(253, 252, 252, 0.9);
+    display: flex;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 3;
+  }
+  
+  .nav-menu {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 10px;
+    list-style: none;
+    text-align: center;
+    width: 70vw;
+    justify-content: end;
+    margin-right: 2rem;
+  }
+  
+  .nav-link {
+    color: black;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+  }
+  
+  .nav-link:hover {
+    color: rgb(104, 109, 112);
+    border-bottom: 1px solid #aaa;
+    transition: all 1s ease;
+  }
+  
+  .navbar-menu-btn {
+    padding-left: 1.25em;
+    position: relative;
+    display: none;
+  }
+  
+  .navbar-menu-btn:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.21em;
+    bottom: 0.21em;
+    width: 1em;
+    border-radius: 2px;
+    background: linear-gradient(
+      to bottom,
+      white,
+      #000000 20%,
+      white 20%,
+      white 30%,
+      white 40%,
+      #000000 50%,
+      white 60%,
+      white 80%,
+      white 80%,
+      #000000 90%,
+      white 100%
+    );
+  }
+  
+  @media screen and (max-width: 900px) {
+    .navbar-container {
+      padding-left: 50px;
+      padding-right: 10px;
+      justify-content: space-between;
+    }
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 400px;
+      position: absolute;
+      top: 60px;
+      left: -100%;
+      transition: all 0.5s ease;
+    }
+  
+    .nav-menu.active {
+      background: rgb(238, 233, 233);
+      left: 0;
+      transition: all 0.5s ease;
+      z-index: 5;
+    }
+  
+    .nav-link {
+      text-align: center;
+      padding: 2rem 0 2rem 0;
+      width: 100%;
+  
+      display: table;
+    }
+  
+    .nav-link:hover {
+      background-color: #e6dada;
+      border-radius: 0;
+    }
+    .navbar-logo {
+      position: relative;
+      margin-left: 20px;
+    }
+  
+    .navbar-menu-btn {
+      display: block;
+      position: relative;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+  }
+  
