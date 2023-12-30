@@ -1,9 +1,10 @@
+from dataclasses import dataclass
+from datetime import datetime
 
+@dataclass
 class Event(object):
-    _user_id: int
-    _event_id: int
-    _calender_ids: list[str]
-
-    def __init__(self, user_id: int):
-        self._user_id = user_id
+    event_ids: dict[str, str]
+    event_summary: str
+    event_start_time: datetime
+    event_end_time: datetime
 
