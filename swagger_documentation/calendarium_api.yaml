@@ -71,11 +71,11 @@ paths:
           description: User Authenticated
   
         '401':
-          description: Passowrd is worng
+          description: Password is wrong
           
   /APIChangePassword:
     put:
-      summary: Changes The Pasword of the user
+      summary: Changes The Password of the user
       tags:
         - Authentication
         
@@ -98,9 +98,9 @@ paths:
           description: User Authenticated
         
         '401':
-          description: Passowrd is worng
+          description: Password is wrong
           
-  /APIResertPassword:
+  /APIResetPassword:
     post:
       summary: Identify User
       tags:
