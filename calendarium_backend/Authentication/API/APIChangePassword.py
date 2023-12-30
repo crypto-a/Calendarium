@@ -8,7 +8,7 @@ from Authentication.TokenRequired import token_required
 authentication = Authentication()
 
 
-class APIUserChangePassword(Resource):
+class APIChangePassword(Resource):
     @token_required
     def put(self):
         """
@@ -18,13 +18,13 @@ class APIUserChangePassword(Resource):
         token = request.args.get('token')
 
         # Decodes the token to find the user id
-        decoded_token = jwt.decode(token, flask_app.secret_key)
+        decoded_token = jwt.decode(token, flask_app.secret_key, algorithms=['HS256'])
         user_id = decoded_token['id']
 
         # Get the user inputted passwords
         json_data = request.json
-        old_password = json_data.get['old_password']
-        new_password = json_data.get['new_password']
+        old_password = json_data.get('old_password')
+        new_password = json_data.get('new_password')
 
         # Change the user's password
         result = authentication.change_password(user_id, old_password, new_password)

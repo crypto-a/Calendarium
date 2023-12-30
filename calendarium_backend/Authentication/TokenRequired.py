@@ -9,8 +9,7 @@ from app import app
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        # Authentication logic goes here
-        token = request.args.get('Authorization')
+        token = request.args.get('token')
 
         if not token:
             return {'message': 'Token is missing!'}, 403

@@ -13,7 +13,8 @@ from database.db_setup import init_db
 from Authentication.API.APIUserSignUp import APIUserSignUp
 from Authentication.API.APIUserSignIn import APIUserSignIn
 from Authentication.API.APIUserAuthenticate import APIUserAuthenticate
-from Authentication.API.APIUserChangePassword import APIUserChangePassword
+from Authentication.API.APIChangePassword import APIChangePassword
+from Authentication.API.APIResetPassword import APIResetPassword
 
 # create api instance
 api_bp = Blueprint('api', __name__)
@@ -26,4 +27,5 @@ api.add_resource(APIBase, "/")
 api.add_resource(APIUserSignUp, "/APISignUp")
 api.add_resource(APIUserSignIn, "/APISignIn")
 api.add_resource(APIUserAuthenticate, "/APIUserAuthenticate")
-api.add_resource(APIUserChangePassword, "/APIUserChangePassword")
+api.add_resource(APIChangePassword, "/APIChangePassword")
+api.add_resource(APIResetPassword, '/APIResetPassword')
