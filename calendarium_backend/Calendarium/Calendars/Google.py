@@ -16,14 +16,14 @@ from googleapiclient.errors import HttpError
 
 class GoogleCalendarService(CalenderService):
 
-    _SCOPES = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.events']
+    _SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 
-    def __init__(self, token_json, credentials_json):
+    def __init__(self):
         # Set up OAuth 2.0 credentials
         creds = None
-            # The file token.json stores the user's access and refresh tokens, and is
-            # created automatically when the authorization flow completes for the first
-            # time.
+        # The file token.json stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
         if os.path.exists("token.json"):
             creds = Credentials.from_authorized_user_file("token.json", self._SCOPES)
         # If there are no (valid) credentials available, let the user log in.
@@ -48,7 +48,6 @@ class GoogleCalendarService(CalenderService):
                                               timeMax='2023-12-31T23:59:59Z', maxResults=10, singleEvents=True,
                                               orderBy='startTime').execute()
 
-
         return events_result.get('items', [])
 
     def add_event_to_calendar(self, event=None):
@@ -71,4 +70,12 @@ class GoogleCalendarService(CalenderService):
         event = self._service.events().insert(calendarId='primary', body=event).execute()
 
         return event
+
+    def delete_event_from_calendar(self, event_id):
+        try:
+            # Call the API to delete the event
+            self._service.events().delete(calendarId='primary', eventId=event_id).execute()
+            print(f"Event with ID {event_id} deleted successfully.")
+        except HttpError as e:
+            print(f"An error occurred while deleting the event: {e}")
 

@@ -23,6 +23,7 @@ class APIUserChangePassword(Resource):
 
         # Get the user inputted passwords
         json_data = request.json
+
         old_password = json_data.get['old_password']
         new_password = json_data.get['new_password']
 

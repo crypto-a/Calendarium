@@ -66,6 +66,7 @@ class Authentication:
         print(database_result[0].is_active)
         return {"message": "Your account has been validated!"}, 200
 
+
     def user_sign_in(self, username, password):
         """
         Programmer: Benjamin Gavriely
@@ -119,6 +120,8 @@ class Authentication:
             else:
                 # Change the user's password
                 database_result.password_hash = database_result.generate_password_hash(new_password)
+
+                # ToDo Update database
                 return {"message": "Your password has been changed!"}, 200
         else:
             # If the current password entered was incorrect

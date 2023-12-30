@@ -1,19 +1,29 @@
 from database import db
 from database.models import User
 from Calendarium.Calendars.Google import GoogleCalendarService
+from Calendarium.Events.Event import Event
 from database.db_transactions import db_transaction
+from Calendarium.Calendars.Microsoft import OutlookCalendarService
 
 class SyncUserData:
     _user: User
     _accounts: list
-    _events: list
+    _events: list[Event]
 
     def __init__(self):
-        google_account = GoogleCalendarService('calendars/token.json', 'credentials.json')
+        # google_account = GoogleCalendarService('calendars/token.json', 'credentials.json')
+        #
+        # for event in google_account.read_events_from_calendar():
+        #     print(event)
+        #
+        # google_account.add_event_to_calendar()
 
-        for event in google_account.read_events_from_calendar():
-            print(event)
+        outlook_account = OutlookCalendarService()
 
-        google_account.add_event_to_calendar()
+        response = outlook_account.add_event_to_calendar()
+
+        print(response)
+
+
 
 
