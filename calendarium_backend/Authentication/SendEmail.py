@@ -3,13 +3,12 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-def send_confirmation_email(email_to, token):
+def send_confirmation_email(email_to, email_body, token):
     email_sender = 'apitestbenjaming@gmail.com'  # Replace with your email address
     email_password = 'kzdh ngkq jcxo lcfe'  # Replace with your email password
     email_subject = 'Welcome to Calendarium!'
     #TODO: Change the email body
-    email_body = ('Please press this link to confirm your Calendarium account!' +
-                  'http://127.0.0.1:44000/api/APIUserAuthenticate?token=' + token)
+    email_body = (email_body + token)
 
     message = MIMEMultipart()
     message['From'] = email_sender
