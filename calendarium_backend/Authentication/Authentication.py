@@ -56,15 +56,16 @@ class Authentication:
         sent to their email and their token is still valid
         """
         # Find the user in the database
-        data_query = User.query.filter_by(user_id=user_id)
-        database_result = db_trans.select_from_table_first_query(data_query)
-        print(database_result)
+        data_query = User.query.filter_by(user_id=user_id).first()
 
-        # Activate the user's account
-        database_result[0].is_active = True
-        db_trans.update_table(database_result[0])
-        print(database_result[0].is_active)
-        return {"message": "Your account has been validated!"}, 200
+        # Checks if the account has already been validated
+        if data_query.is_active:
+            return {"message": "Your account has already been validated!"}, 200
+        else:
+            # Activate the user's account
+            data_query.is_active = True
+            db_trans.update_table(data_query)
+            return {"message": "Your account has been validated!"}, 200
 
 
     def user_sign_in(self, username, password):
